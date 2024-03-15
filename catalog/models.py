@@ -1,11 +1,7 @@
-from django.db import models
-
-# Create your models here.
-
-
-# models.py
 
 from django.db import models
+
+NULLABLE = {'blank': True, 'null': True}
 
 
 class Category(models.Model):
@@ -24,7 +20,7 @@ class Category(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=100, verbose_name='Наименование')
     description = models.CharField(max_length=200, verbose_name='Описание')
-    image = models.ImageField(upload_to='product_images/', verbose_name='Изображение (превью)')
+    image = models.ImageField(upload_to='product_images/', verbose_name='Изображение (превью)', **NULLABLE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория')
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена за покупку')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
