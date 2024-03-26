@@ -1,0 +1,21 @@
+{% extends 'catalog/base.html' %}
+{% load media_tags %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                    <img class="card-img-top"
+                         src="{{ product.image|media_url }}"
+                         alt="Card image cap">
+                </div>
+                <div class="col-md-8">
+                    <h2>{{ product.name }}</h2>
+                    <p>Цена: {{ product.price }}</p>
+                    <p>Описание: {{ product.description }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
