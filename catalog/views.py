@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic import ListView, DetailView, TemplateView
 
 from catalog.models import Product
 
@@ -6,30 +7,16 @@ from catalog.models import Product
 # Create your views here.
 
 
-def index(request):
-    product_list = Product.objects.all()
-    context = {
-        'object_list': product_list,
-        'title': 'Главная'
-    }
-    return render(request, 'catalog/index.html', context)
+class ProductListView(ListView):
+    model = Product
+    template_name = 'catalog/index.html'
 
 
-def contact(request):
-    context = {
-        'title': 'Контакты'
-    }
-    return render(request, 'catalog/contact.html', context)
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'catalog/product_detail.html'
 
 
-def product_detail(request, pk):
-    product = Product.objects.get(pk=pk)
-    context = {'product': product}
-
-    # Проверяем, есть ли у продукта изображение
-    if product.image:
-        # Если у продукта есть изображение, передаем URL изображения в контекст
-        context['product_image_url'] = product.image.url
-
-    return render(request, 'catalog/product_detail.html', context)
+class ContactView(TemplateView):
+    template_name = 'catalog/contact.html'
 

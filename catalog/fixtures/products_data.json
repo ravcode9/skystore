@@ -1,54 +1,54 @@
 [
   {
     "model": "catalog.product",
-    "pk": 47,
+    "pk": 59,
     "fields": {
       "name": "картофель",
       "description": "всегда пригодится",
       "image": "",
-      "category": 31,
+      "category": 45,
       "price": "50.00",
-      "created_at": "2024-03-15T13:11:29.340Z",
-      "updated_at": "2024-03-15T13:11:29.340Z"
+      "created_at": "2024-03-15T13:19:39.771Z",
+      "updated_at": "2024-03-15T13:19:39.771Z"
     }
   },
   {
     "model": "catalog.product",
-    "pk": 48,
+    "pk": 60,
     "fields": {
       "name": "помидор",
       "description": "",
       "image": "",
-      "category": 31,
+      "category": 45,
       "price": "60.00",
-      "created_at": "2024-03-15T13:11:29.340Z",
-      "updated_at": "2024-03-15T13:11:29.340Z"
+      "created_at": "2024-03-15T13:19:39.773Z",
+      "updated_at": "2024-03-15T13:19:39.773Z"
     }
   },
   {
     "model": "catalog.product",
-    "pk": 49,
+    "pk": 61,
     "fields": {
       "name": "банан",
       "description": "полезный перекус",
       "image": "",
-      "category": 32,
+      "category": 46,
       "price": "90.00",
-      "created_at": "2024-03-15T13:11:29.340Z",
-      "updated_at": "2024-03-15T13:11:29.340Z"
+      "created_at": "2024-03-15T13:19:39.775Z",
+      "updated_at": "2024-03-15T13:19:39.775Z"
     }
   },
   {
     "model": "catalog.product",
-    "pk": 50,
+    "pk": 62,
     "fields": {
       "name": "яблоко",
-      "description": "",
-      "image": "",
-      "category": 32,
+      "description": "Сочное и полезное",
+      "image": "product_images/apple2.jpg",
+      "category": 46,
       "price": "70.00",
-      "created_at": "2024-03-15T13:11:29.340Z",
-      "updated_at": "2024-03-15T13:11:29.340Z"
+      "created_at": "2024-03-15T13:19:39.776Z",
+      "updated_at": "2024-03-26T09:22:03.905Z"
     }
   }
 ]
