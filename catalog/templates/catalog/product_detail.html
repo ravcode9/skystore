@@ -14,6 +14,9 @@
                     <h2>{{ object.name }}</h2>
                     <p>Цена: {{ object.price }}</p>
                     <p>Описание: {{ object.description }}</p>
+                    {% if object.active_version %}
+                        <a href="{% url 'update_version' object.active_version.id %}" class="btn btn-primary">Изменить версию</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
