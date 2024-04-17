@@ -15,7 +15,7 @@
                         <p class="card-text">{{ product.description|slice:":100" }}</p>
                         {% with product_versions|get_active_version:product as active_version %}
                             {% if active_version %}
-                                <p class="card-text">Активная версия: {{ active_version.version_name }}
+                                <p class="card-text"> {{ active_version.version_name }}
                                     ({{ active_version.version_number }})</p>
                             {% endif %}
                         {% endwith %}

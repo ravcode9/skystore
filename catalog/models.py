@@ -46,3 +46,8 @@ class Version(models.Model):
 
     def __str__(self):
         return f'{self.product.name} - {self.version_number}'
+
+    def save(self, *args, **kwargs):
+        if self.is_current:
+            Version.objects.filter(product=self.product).exclude(id=self.id).update(is_current=False)
+        super().save(*args, **kwargs)
