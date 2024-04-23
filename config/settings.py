@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'catalog',
     'blog',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -135,3 +136,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+AUTH_USER_MODEL = 'users.User'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 2525
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = 'manu_alex_ilov@mail.ru'
+EMAIL_HOST_PASSWORD = 'FmgfPwC9dREg6NDV8Rfx'
+
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
