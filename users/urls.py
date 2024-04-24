@@ -13,6 +13,5 @@ urlpatterns = [
     path('profile/', ProfileView.as_view(), name='profile'),
     path('register/confirm/<str:token>/', email_verification, name='email_verification'),
     path('register/message/', RegisterMessageView.as_view(), name='register_message'),
-    path('profile/', ProfileView.as_view(), name='profile'),
     path('password_recovery/', PasswordRecoveryView.as_view(), name='password_recovery'),
 ]

@@ -5,7 +5,9 @@
 {% block content %}
     <div class="col-12 mb-5">
     {% if user.is_authenticated %}
+        {% if perms.main.add_product %}
         <a class="btn btn-outline-primary" href="{% url 'catalog:create_product' %}">Добавить продукт</a>
+        {% endif %}
     </div>
     {% endif %}
     <div class="row">
@@ -25,10 +27,14 @@
                             <div class="btn-group">
                                 <a href="{% url 'catalog:product_detail' product.pk %}"
                                    class="btn btn-sm btn-outline-secondary">Подробнее</a>
+                                {% if perms.main.change_product %}
                                 <a href="{% url 'catalog:update_product' product.pk %}"
                                    class="btn btn-sm btn-outline-secondary">Изменить</a>
+                                {% endif %}
+                                {% if perms.main.delete_product %}
                                 <a href="{% url 'catalog:delete_product' product.pk %}"
                                    class="btn btn-sm btn-outline-danger">Удалить</a>
+                                {% endif %}
                             </div>
                             <small class="text-muted">{{ product.price }}</small>
                         </div>
