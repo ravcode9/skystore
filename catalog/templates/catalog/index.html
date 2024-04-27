@@ -4,43 +4,48 @@
 
 {% block content %}
     <div class="col-12 mb-5">
-    {% if user.is_authenticated %}
-        {% if perms.main.add_product %}
-        <a class="btn btn-outline-primary" href="{% url 'catalog:create_product' %}">Добавить продукт</a>
+        {% if user.is_authenticated %}
+            {% if perms.main.add_product %}
+                <a class="btn btn-outline-primary" href="{% url 'catalog:create_product' %}">Добавить продукт</a>
+            {% endif %}
         {% endif %}
     </div>
-    {% endif %}
+
     <div class="row">
         {% for product in object_list %}
-            <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
-                    <div class="card-body">
-                        <h4 class="card-title">{{ product.name }}</h4>
-                        <p class="card-text">{{ product.description|slice:":100" }}</p>
-                        {% with product_versions|get_active_version:product as active_version %}
-                            {% if active_version %}
-                                <p class="card-text"> {{ active_version.version_name }}
-                                    ({{ active_version.version_number }})</p>
+            {% if product.is_published %}
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ product.name }}</h4>
+                            {% if product.description %}
+                                <p class="card-text">{{ product.description|slice:":100" }}</p>
                             {% endif %}
-                        {% endwith %}
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <a href="{% url 'catalog:product_detail' product.pk %}"
-                                   class="btn btn-sm btn-outline-secondary">Подробнее</a>
-                                {% if perms.main.change_product %}
-                                <a href="{% url 'catalog:update_product' product.pk %}"
-                                   class="btn btn-sm btn-outline-secondary">Изменить</a>
+                            {% with product_versions|get_active_version:product as active_version %}
+                                {% if active_version %}
+                                    <p class="card-text"> {{ active_version.version_name }}
+                                        ({{ active_version.version_number }})</p>
                                 {% endif %}
-                                {% if perms.main.delete_product %}
-                                <a href="{% url 'catalog:delete_product' product.pk %}"
-                                   class="btn btn-sm btn-outline-danger">Удалить</a>
-                                {% endif %}
+                            {% endwith %}
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="{% url 'catalog:product_detail' product.pk %}"
+                                       class="btn btn-sm btn-outline-secondary">Подробнее</a>
+                                    {% if perms.catalog.can_edit_product and perms.catalog.can_edit_description and perms.catalog.can_edit_is_published or user == product.owner %}
+                                        <a href="{% url 'catalog:update_product' product.pk %}"
+                                           class="btn btn-sm btn-outline-secondary">Изменить</a>
+                                    {% endif %}
+                                    {% if user.is_superuser %}
+                                        <a href="{% url 'catalog:delete_product' product.pk %}"
+                                           class="btn btn-sm btn-outline-danger">Удалить</a>
+                                    {% endif %}
+                                </div>
+                                <small class="text-muted">{{ product.price }}</small>
                             </div>
-                            <small class="text-muted">{{ product.price }}</small>
                         </div>
                     </div>
                 </div>
-            </div>
+            {% endif %}
         {% endfor %}
     </div>
 {% endblock %}

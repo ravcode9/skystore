@@ -1,5 +1,6 @@
 import random
 
+from django.contrib import messages
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
@@ -64,17 +65,19 @@ class PasswordRecoveryView(FormView):
         try:
             user = User.objects.get(email=email)
         except User.DoesNotExist:
-            form.add_error('email', 'Пользователь с таким email не найден')
-            return super().form_invalid(form)
-        new_password = get_random_string(length=12)
-        user.password = make_password(new_password)
-        user.save()
-        send_mail(
-            'Восстановление пароля',
-            f'Ваш новый пароль: {new_password}',
-            settings.DEFAULT_FROM_EMAIL,
-            [email],
-            fail_silently=False,
-        )
+            pass
+        else:
+            new_password = get_random_string(length=12)
+            user.password = make_password(new_password)
+            user.save()
+            send_mail(
+                'Восстановление пароля',
+                f'Ваш новый пароль: {new_password}',
+                settings.DEFAULT_FROM_EMAIL,
+                [email],
+                fail_silently=False,
+            )
+
+        messages.success(self.request, 'На вашу почту выслано сообщение о восстановлении пароля.')
 
         return super().form_valid(form)

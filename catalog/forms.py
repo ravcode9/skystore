@@ -15,7 +15,7 @@ class StyleFormMixin:
 class ProductForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Product
-        fields = ('name', 'price', 'category', 'image')
+        fields = ('name', 'price', 'category', 'image', 'is_published')
 
     def clean_name(self):
         name = self.cleaned_data['name']
@@ -32,6 +32,12 @@ class ProductForm(StyleFormMixin, forms.ModelForm):
             if word in description.lower():
                 raise ValidationError(f'Слово "{word}" запрещено в описании продукта.')
         return description
+
+
+class ProductModeratorForm(StyleFormMixin, forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ('description', 'category', 'is_published')
 
 
 class VersionForm(StyleFormMixin, forms.ModelForm):
