@@ -2,10 +2,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.core.exceptions import PermissionDenied
 from django.forms import inlineformset_factory
 from django.http import HttpResponseForbidden
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
 from catalog.forms import ProductForm, VersionForm, ProductModeratorForm
 from catalog.models import Product, Version
+from catalog.services import get_categories
 
 
 class ProductListView(LoginRequiredMixin, ListView):
@@ -96,3 +98,8 @@ class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         return self.request.user.is_superuser
+
+
+def category_list(request):
+    categories = get_categories()
+    return render(request, 'catalog/category_list.html', {'categories': categories})
